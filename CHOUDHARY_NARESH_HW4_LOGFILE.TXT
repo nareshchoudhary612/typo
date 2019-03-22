@@ -1,0 +1,777 @@
+Git: https://github.com/nareshchoudhary612/typo
+
+Heroku: https://frozen-dusk-41535.herokuapp.com/admin
+
+TYPO Login:
+Login: admin
+Password: QSapBTB
+
+***************************************************************************************************************************
+Cucumber results before fix
+***************************************************************************************************************************
+
+Using the default profile...
+/home/ec2-user/.rvm/gems/ruby-1.9.3-p551/gems/activesupport-3.0.17/lib/active_support/dependencies.rb:242:in `block in require': iconv will be deprecated in the future, use String#encode instead.
+Feature: Create Blog
+  As an author
+  In order to gift my thoughts to the world
+  I want to create a blog
+
+  Scenario: Create blog page shown      # features/create_blog.feature:6
+    Given I am on the home page         # features/step_definitions/web_steps.rb:68
+    Then I should see "Welcome"         # features/step_definitions/web_steps.rb:129
+    And I should see "My Shiny Weblog!" # features/step_definitions/web_steps.rb:129
+
+  Scenario: Create blog page not shown when blog created # features/create_blog.feature:11
+    Given the blog is set up                             # features/step_definitions/web_steps.rb:34
+    When I am on the home page                           # features/step_definitions/web_steps.rb:68
+    Then I should not see "My Shiny Weblog!"             # features/step_definitions/web_steps.rb:147
+    And I should see "Teh Blag"                          # features/step_definitions/web_steps.rb:129
+
+Feature: Create categories
+  As an blog administrator
+  In order to share my thoughts to the world
+  I want to be able to add categories to my blog
+
+  Background:                            # features/create_categories.feature:6
+    Given the blog is set up             # features/step_definitions/web_steps.rb:34
+    And I am logged into the admin panel # features/step_definitions/web_steps.rb:46
+
+  Scenario: Successfully Create categories             # features/create_categories.feature:10
+    Given I am on the new categories page              # features/step_definitions/web_steps.rb:68
+      Can't find mapping from "the new categories page" to a path.
+      Now, go and add a mapping in /home/ec2-user/environment/typo/features/support/paths.rb (RuntimeError)
+      ./features/support/paths.rb:34:in `rescue in path_to'
+      ./features/support/paths.rb:28:in `path_to'
+      ./features/step_definitions/web_steps.rb:69:in `/^(?:|I )am on (.+)$/'
+      features/create_categories.feature:11:in `Given I am on the new categories page'
+    When I fill in "category_name" with "books"        # features/step_definitions/web_steps.rb:84
+    And I fill in "category_keywords" with "romantic"  # features/step_definitions/web_steps.rb:84
+    And I fill in "category_permalink" with "yes"      # features/step_definitions/web_steps.rb:84
+    And I fill in "category_description" with "desc"   # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                 # features/step_definitions/web_steps.rb:76
+    Then I should see "books"                          # features/step_definitions/web_steps.rb:129
+    Then I should see "romantic"                       # features/step_definitions/web_steps.rb:129
+    Then I should see "yes"                            # features/step_definitions/web_steps.rb:129
+    Then I should see "desc"                           # features/step_definitions/web_steps.rb:129
+    Then I follow "books"                              # features/step_definitions/web_steps.rb:80
+    When I fill in "category_name" with "books1"       # features/step_definitions/web_steps.rb:84
+    And I fill in "category_keywords" with "romantic1" # features/step_definitions/web_steps.rb:84
+    And I fill in "category_permalink" with "yes1"     # features/step_definitions/web_steps.rb:84
+    And I fill in "category_description" with "desc1"  # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                 # features/step_definitions/web_steps.rb:76
+    Then I should see "books1"                         # features/step_definitions/web_steps.rb:129
+    Then I should see "romantic1"                      # features/step_definitions/web_steps.rb:129
+    Then I should see "yes1"                           # features/step_definitions/web_steps.rb:129
+    Then I should see "desc1"                          # features/step_definitions/web_steps.rb:129
+
+Feature: Write Articles
+  As a blog administrator
+  In order to share my thoughts with the world
+  I want to be able to add articles to my blog
+
+  Background:                            # features/write_article.feature:6
+    Given the blog is set up             # features/step_definitions/web_steps.rb:34
+    And I am logged into the admin panel # features/step_definitions/web_steps.rb:46
+
+  Scenario: Successfully write articles                                  # features/write_article.feature:10
+    Given I am on the new article page                                   # features/step_definitions/web_steps.rb:68
+    When I fill in "article_title" with "Foobar"                         # features/step_definitions/web_steps.rb:84
+    And I fill in "article__body_and_extended_editor" with "Lorem Ipsum" # features/step_definitions/web_steps.rb:84
+    And I press "Publish"                                                # features/step_definitions/web_steps.rb:76
+    Then I should be on the admin content page                           # features/step_definitions/web_steps.rb:254
+    When I go to the home page                                           # features/step_definitions/web_steps.rb:72
+    Then I should see "Foobar"                                           # features/step_definitions/web_steps.rb:129
+    When I follow "Foobar"                                               # features/step_definitions/web_steps.rb:80
+    Then I should see "Lorem Ipsum"                                      # features/step_definitions/web_steps.rb:129
+
+Failing Scenarios:
+cucumber features/create_categories.feature:10 # Scenario: Successfully Create categories
+
+4 scenarios (1 failed, 3 passed)
+40 steps (1 failed, 19 skipped, 20 passed)
+0m2.398s
+rake aborted!
+Command failed with status (1): [/home/ec2-user/.rvm/rubies/ruby-1.9.3-p551...]
+
+***************************************************************************************************************************
+Cucumber after fix
+***************************************************************************************************************************
+l be deprecated in the future, use String#encode instead.
+Feature: Create Blog
+  As an author
+  In order to gift my thoughts to the world
+  I want to create a blog
+
+  Scenario: Create blog page shown      # features/create_blog.feature:6
+    Given I am on the home page         # features/step_definitions/web_steps.rb:68
+    Then I should see "Welcome"         # features/step_definitions/web_steps.rb:129
+    And I should see "My Shiny Weblog!" # features/step_definitions/web_steps.rb:129
+
+  Scenario: Create blog page not shown when blog created # features/create_blog.feature:11
+    Given the blog is set up                             # features/step_definitions/web_steps.rb:34
+    When I am on the home page                           # features/step_definitions/web_steps.rb:68
+    Then I should not see "My Shiny Weblog!"             # features/step_definitions/web_steps.rb:147
+    And I should see "Teh Blag"                          # features/step_definitions/web_steps.rb:129
+
+Feature: Create categories
+  As an blog administrator
+  In order to share my thoughts to the world
+  I want to be able to add categories to my blog
+
+  Background:                            # features/create_categories.feature:6
+    Given the blog is set up             # features/step_definitions/web_steps.rb:34
+    And I am logged into the admin panel # features/step_definitions/web_steps.rb:46
+
+  Scenario: Successfully Create categories             # features/create_categories.feature:10
+    Given I am on the new categories page              # features/step_definitions/web_steps.rb:68
+    When I fill in "category_name" with "books"        # features/step_definitions/web_steps.rb:84
+    And I fill in "category_keywords" with "romantic"  # features/step_definitions/web_steps.rb:84
+    And I fill in "category_permalink" with "yes"      # features/step_definitions/web_steps.rb:84
+    And I fill in "category_description" with "desc"   # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                 # features/step_definitions/web_steps.rb:76
+    Then I should see "books"                          # features/step_definitions/web_steps.rb:129
+    Then I should see "romantic"                       # features/step_definitions/web_steps.rb:129
+    Then I should see "yes"                            # features/step_definitions/web_steps.rb:129
+    Then I should see "desc"                           # features/step_definitions/web_steps.rb:129
+    Then I follow "books"                              # features/step_definitions/web_steps.rb:80
+    When I fill in "category_name" with "books1"       # features/step_definitions/web_steps.rb:84
+    And I fill in "category_keywords" with "romantic1" # features/step_definitions/web_steps.rb:84
+    And I fill in "category_permalink" with "yes1"     # features/step_definitions/web_steps.rb:84
+    And I fill in "category_description" with "desc1"  # features/step_definitions/web_steps.rb:84
+    And I press "Save"                                 # features/step_definitions/web_steps.rb:76
+    Then I should see "books1"                         # features/step_definitions/web_steps.rb:129
+    Then I should see "romantic1"                      # features/step_definitions/web_steps.rb:129
+    Then I should see "yes1"                           # features/step_definitions/web_steps.rb:129
+    Then I should see "desc1"                          # features/step_definitions/web_steps.rb:129
+
+Feature: Write Articles
+  As a blog administrator
+  In order to share my thoughts with the world
+  I want to be able to add articles to my blog
+
+  Background:                            # features/write_article.feature:6
+    Given the blog is set up             # features/step_definitions/web_steps.rb:34
+    And I am logged into the admin panel # features/step_definitions/web_steps.rb:46
+
+  Scenario: Successfully write articles                                  # features/write_article.feature:10
+    Given I am on the new article page                                   # features/step_definitions/web_steps.rb:68
+    When I fill in "article_title" with "Foobar"                         # features/step_definitions/web_steps.rb:84
+    And I fill in "article__body_and_extended_editor" with "Lorem Ipsum" # features/step_definitions/web_steps.rb:84
+    And I press "Publish"                                                # features/step_definitions/web_steps.rb:76
+    Then I should be on the admin content page                           # features/step_definitions/web_steps.rb:254
+    When I go to the home page                                           # features/step_definitions/web_steps.rb:72
+    Then I should see "Foobar"                                           # features/step_definitions/web_steps.rb:129
+    When I follow "Foobar"                                               # features/step_definitions/web_steps.rb:80
+    Then I should see "Lorem Ipsum"                                      # features/step_definitions/web_steps.rb:129
+
+4 scenarios (4 passed)
+40 steps (40 passed)
+0m2.185s
+ec2-user:~/environment/typo (master) $ 
+
+****************************************************************
+
+************************************************************************************************************************************
+RSPEC LOGS
+**********************************************************************************************************************************
+rspec ./spec/controllers/admin/resources_controller_spec.rb:37 # Admin::ResourcesController test_destroy_image with get should have a valid file
+rspec ./spec/controllers/admin/cache_controller_spec.rb:19 # Admin::CacheController test_index should render template index
+rspec ./spec/controllers/admin/settings_controller_spec.rb:19 # Admin::SettingsController#index should render index
+rspec ./spec/controllers/admin/settings_controller_spec.rb:29 # Admin::SettingsController write action should be success
+rspec ./spec/controllers/admin/settings_controller_spec.rb:39 # Admin::SettingsController feedback action should be sucess
+rspec ./spec/controllers/admin/settings_controller_spec.rb:45 # Admin::SettingsController redirect action should be success
+rspec ./spec/controllers/admin/settings_controller_spec.rb:66 # Admin::SettingsController update action should success
+rspec ./spec/controllers/admin/settings_controller_spec.rb:71 # Admin::SettingsController update action should not save blog with bad permalink format
+rspec ./spec/controllers/admin/pages_controller_spec.rb:56 # Admin::PagesController test_create
+rspec ./spec/controllers/admin/pages_controller_spec.rb:85 # Admin::PagesController test_update
+rspec ./spec/controllers/admin/pages_controller_spec.rb:96 # Admin::PagesController test_destroy
+rspec ./spec/controllers/admin/pages_controller_spec.rb:110 # Admin::PagesController should create a published page with a redirect
+rspec ./spec/controllers/admin/pages_controller_spec.rb:115 # Admin::PagesController should create an unpublished page without a redirect
+rspec ./spec/controllers/admin/pages_controller_spec.rb:120 # Admin::PagesController should create a page published in the future without a redirect
+rspec ./spec/controllers/admin/pages_controller_spec.rb:16 # Admin::PagesController#index should response success
+rspec ./spec/controllers/admin/pages_controller_spec.rb:23 # Admin::PagesController#index should response success with :page args
+rspec ./spec/controllers/admin/pages_controller_spec.rb:39 # Admin::PagesController new without page params should render template new and has a page object
+ispec ./spec/controllers/admin/pages_controller_spec.rb:45 # Admin::PagesController new without page params should assign to current user
+rspec ./spec/controllers/admin/pages_controller_spec.rb:49 # Admin::PagesController new without page params should have a text filter
+rspec ./spec/controllers/admin/pages_controller_spec.rb:76 # Admin::PagesController test_edit should render edit template
+rspec ./spec/controllers/admin/pages_controller_spec.rb:127 # Admin::PagesController insert_editor action should render _simple_editor
+rspec ./spec/controllers/admin/pages_controller_spec.rb:132 # Admin::PagesController insert_editor action should render _visual_editor
+rspec ./spec/controllers/admin/pages_controller_spec.rb:137 # Admin::PagesController insert_editor action should render _visual_editor even if editor param is set to unknow editor
+rspec ./spec/controllers/admin/textfilters_controller_spec.rb:7 # Admin::TextfiltersController macro help action should render success
+rspec ./spec/controllers/admin/tags_controller_spec.rb:19 # Admin::TagsController index action should be success
+rspec ./spec/controllers/admin/tags_controller_spec.rb:23 # Admin::TagsController index action should render template index
+rspec ./spec/controllers/admin/tags_controller_spec.rb:34 # Admin::TagsController edit action should be success
+rspec ./spec/controllers/admin/tags_controller_spec.rb:38 # Admin::TagsController edit action should render template edit
+rspec ./spec/controllers/admin/tags_controller_spec.rb:42 # Admin::TagsController edit action should assigns value :tag
+rspec ./spec/controllers/admin/tags_controller_spec.rb:53 # Admin::TagsController destroy action with GET should be success
+rspec ./spec/controllers/admin/tags_controller_spec.rb:57 # Admin::TagsController destroy action with GET should have an id in the form destination
+rspec ./spec/controllers/admin/tags_controller_spec.rb:61 # Admin::TagsController destroy action with GET should render template edit
+rspec ./spec/controllers/admin/tags_controller_spec.rb:65 # Admin::TagsController destroy action with GET should assigns value :tag
+rspec ./spec/controllers/admin/tags_controller_spec.rb:76 # Admin::TagsController destroy action with POST should redirect to index
+rspec ./spec/controllers/admin/tags_controller_spec.rb:80 # Admin::TagsController destroy action with POST should have one less tags
+rspec ./spec/controllers/admin/tags_controller_spec.rb:92 # Admin::TagsController update action should redirect to index
+rspec ./spec/controllers/admin/tags_controller_spec.rb:96 # Admin::TagsController update action should update tag
+rspec ./spec/controllers/admin/tags_controller_spec.rb:102 # Admin::TagsController update action should create a redirect from the old to the new
+rspec ./spec/controllers/admin/categories_controller_spec.rb:14 # Admin::CategoriesController test_index
+rspec ./spec/controllers/admin/categories_controller_spec.rb:55 # Admin::CategoriesController test_update
+rspec ./spec/controllers/admin/categories_controller_spec.rb:73 # Admin::CategoriesController test_destroy with POST
+rspec ./spec/controllers/admin/categories_controller_spec.rb:24 # Admin::CategoriesController test_create should render template new
+rspec ./spec/controllers/admin/categories_controller_spec.rb:29 # Admin::CategoriesController test_create should create a new category
+rspec ./spec/controllers/admin/categories_controller_spec.rb:42 # Admin::CategoriesController test_edit should render template new
+rspec ./spec/controllers/admin/categories_controller_spec.rb:48 # Admin::CategoriesController test_edit should have valid category
+rspec ./spec/controllers/admin/categories_controller_spec.rb:67 # Admin::CategoriesController test_destroy with GET should render destroy template
+rspec ./spec/controllers/admin/seo_controller_spec.rb:19 # Admin::SeoController#index should render index
+rspec ./spec/controllers/admin/seo_controller_spec.rb:29 # Admin::SeoController#permalinks should render permalinks
+rspec ./spec/controllers/admin/seo_controller_spec.rb:39 # Admin::SeoController#titles should render titles
+rspec ./spec/controllers/admin/seo_controller_spec.rb:52 # Admin::SeoController update action should success
+rspec ./spec/controllers/admin/seo_controller_spec.rb:57 # Admin::SeoController update action should not save blog with bad permalink format
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:58 # Admin::FeedbackController logged in admin user destroy action should destroy feedback from article doesn't own
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:8 # Admin::FeedbackController logged in admin user destroy action it should behave like destroy feedback with feedback from own article should destroy feedback
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:18 # Admin::FeedbackController logged in admin user destroy action it should behave like destroy feedback with feedback from own article should redirect to feedback from article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:23 # Admin::FeedbackController logged in admin user destroy action it should behave like destroy feedback with feedback from own article should not destroy feedback in get request
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:82 # Admin::FeedbackController logged in admin user index action should success
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:90 # Admin::FeedbackController logged in admin user index action should view only unconfirmed feedback
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:98 # Admin::FeedbackController logged in admin user index action should view only spam feedback
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:106 # Admin::FeedbackController logged in admin user index action should view unconfirmed_spam
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:117 # Admin::FeedbackController logged in admin user index action should view presumed_spam
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:125 # Admin::FeedbackController logged in admin user index action should view presumed_ham
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:134 # Admin::FeedbackController logged in admin user index action should get page 1 if page params empty
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:148 # Admin::FeedbackController logged in admin user article action should see all feedback on one article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:158 # Admin::FeedbackController logged in admin user article action should see only spam feedback on one article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:167 # Admin::FeedbackController logged in admin user article action should see only ham feedback on one article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:176 # Admin::FeedbackController logged in admin user article action should redirect_to index if bad article id
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:191 # Admin::FeedbackController logged in admin user create action by get access should raise ActiveRecordNotFound if article doesn't exist
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:197 # Admin::FeedbackController logged in admin user create action by get access should not create comment
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:208 # Admin::FeedbackController logged in admin user create action by post access should raise ActiveRecordNotFound if article doesn't exist
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:214 # Admin::FeedbackController logged in admin user create action by post access should create comment
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:222 # Admin::FeedbackController logged in admin user create action by post access should create comment mark as ham
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:235 # Admin::FeedbackController logged in admin user edit action should render edit form
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:248 # Admin::FeedbackController logged in admin user update action should update comment if post request
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:260 # Admin::FeedbackController logged in admin user update action should not  update comment if get request
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:298 # Admin::FeedbackController publisher access destroy action should not destroy feedback doesn't own
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:8 # Admin::FeedbackController publisher access destroy action it should behave like destroy feedback with feedback from own article should destroy feedback
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:18 # Admin::FeedbackController publisher access destroy action it should behave like destroy feedback with feedback from own article should redirect to feedback from article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:23 # Admin::FeedbackController publisher access destroy action it should behave like destroy feedback with feedback from own article should not destroy feedback in get request
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:309 # Admin::FeedbackController publisher access edit action should not edit comment no own article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:314 # Admin::FeedbackController publisher access edit action should edit comment if own article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:326 # Admin::FeedbackController publisher access update action should update comment if own article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:336 # Admin::FeedbackController publisher access update action should not update comment if not own article
+rspec ./spec/controllers/admin/feedback_controller_spec.rb:348 # Admin::FeedbackController publisher access#bulkops action should redirect to action
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:24 # Admin::RedirectsController test_create
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:32 # Admin::RedirectsController test_create with empty from path
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:52 # Admin::RedirectsController test_update
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:19 # Admin::RedirectsController#index should display index with redirects
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:45 # Admin::RedirectsController#edit should render new template with valid redirect
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:68 # Admin::RedirectsController test_destroy with GET should render destroy template
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:79 # Admin::RedirectsController test_destroy with POST should redirect to index
+rspec ./spec/controllers/admin/redirects_controller_spec.rb:83 # Admin::RedirectsController test_destroy with POST should have no more redirects
+rspec ./spec/controllers/admin/profiles_controller_spec.rb:6 # Admin::ProfilesController#index should render index
+rspec ./spec/controllers/admin/profiles_controller_spec.rb:19 # Admin::ProfilesController successful POST to index redirects to profile page
+rspec ./spec/controllers/admin/sidebar_controller_spec.rb:15 # Admin::SidebarController rendering test_index
+rspec ./spec/controllers/admin/dashboard_controller_spec.rb:16 # Admin::DashboardController test index should render the index template
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:13 # Admin::PostTypesController index shoudld redirect to new
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:18 # Admin::PostTypesController test_create
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:64 # Admin::PostTypesController test_destroy with POST
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:33 # Admin::PostTypesController test_new should render template new
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:40 # Admin::PostTypesController test_edit should render template new
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:45 # Admin::PostTypesController test_edit test_update
+rspec ./spec/controllers/admin/post_types_controller_spec.rb:58 # Admin::PostTypesController test_destroy with GET should render destroy template
+rspec ./spec/controllers/admin/themes_controller_spec.rb:25 # Admin::ThemesController redirects to :index after the :switchto action
+rspec ./spec/controllers/admin/themes_controller_spec.rb:30 # Admin::ThemesController returns succes for the :preview action
+rspec ./spec/controllers/admin/themes_controller_spec.rb:19 # Admin::ThemesController test index assigns @themes for the :index action
+rspec ./spec/controllers/admin/content_controller_spec.rb:191 # Admin::ContentController insert_editor action should render _simple_editor
+rspec ./spec/controllers/admin/content_controller_spec.rb:196 # Admin::ContentController insert_editor action should render _visual_editor
+rspec ./spec/controllers/admin/content_controller_spec.rb:201 # Admin::ContentController insert_editor action should render _visual_editor even if editor param is set to unknow editor
+rspec ./spec/controllers/admin/content_controller_spec.rb:9 # Admin::ContentController with admin connection it should behave like index action should render template index
+rspec ./spec/controllers/admin/content_controller_spec.rb:14 # Admin::ContentController with admin connection it should behave like index action should see all published in index
+rspec ./spec/controllers/admin/content_controller_spec.rb:20 # Admin::ContentController with admin connection it should behave like index action should restrict only by searchstring
+rspec ./spec/controllers/admin/content_controller_spec.rb:28 # Admin::ContentController with admin connection it should behave like index action should restrict by searchstring and published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:36 # Admin::ContentController with admin connection it should behave like index action should restrict to drafts
+rspec ./spec/controllers/admin/content_controller_spec.rb:44 # Admin::ContentController with admin connection it should behave like index action should restrict to publication pending articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:52 # Admin::ContentController with admin connection it should behave like index action should restrict to withdrawn articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:60 # Admin::ContentController with admin connection it should behave like index action should restrict to withdrawn articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:68 # Admin::ContentController with admin connection it should behave like index action should restrict to published articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:75 # Admin::ContentController with admin connection it should behave like index action should fallback to default behavior
+rspec ./spec/controllers/admin/content_controller_spec.rb:233 # Admin::ContentController with admin connection it should behave like new action should create article with no comments
+rspec ./spec/controllers/admin/content_controller_spec.rb:241 # Admin::ContentController with admin connection it should behave like new action should create a published article with a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:246 # Admin::ContentController with admin connection it should behave like new action should create a draft article without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:251 # Admin::ContentController with admin connection it should behave like new action should create an unpublished article without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:256 # Admin::ContentController with admin connection it should behave like new action should create an article published in the future without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:261 # Admin::ContentController with admin connection it should behave like new action should create article with no pings
+rspec ./spec/controllers/admin/content_controller_spec.rb:268 # Admin::ContentController with admin connection it should behave like new action should create an article linked to the current user
+rspec ./spec/controllers/admin/content_controller_spec.rb:274 # Admin::ContentController with admin connection it should behave like new action should create new published article
+rspec ./spec/controllers/admin/content_controller_spec.rb:280 # Admin::ContentController with admin connection it should behave like new action should redirect to show
+rspec ./spec/controllers/admin/content_controller_spec.rb:285 # Admin::ContentController with admin connection it should behave like new action should send notifications on create
+rspec ./spec/controllers/admin/content_controller_spec.rb:302 # Admin::ContentController with admin connection it should behave like new action should create an article in a category
+rspec ./spec/controllers/admin/content_controller_spec.rb:309 # Admin::ContentController with admin connection it should behave like new action should create an article with tags
+rspec ./spec/controllers/admin/content_controller_spec.rb:315 # Admin::ContentController with admin connection it should behave like new action should create article in future
+rspec ./spec/controllers/admin/content_controller_spec.rb:326 # Admin::ContentController with admin connection it should behave like new action should correctly interpret time zone in :published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:332 # Admin::ContentController with admin connection it should behave like new action should respect "GMT+0000 (UTC)" in :published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:338 # Admin::ContentController with admin connection it should behave like new action should create a filtered article
+rspec ./spec/controllers/admin/content_controller_spec.rb:211 # Admin::ContentController with admin connection it should behave like new action GET renders the 'new' template
+rspec ./spec/controllers/admin/content_controller_spec.rb:218 # Admin::ContentController with admin connection it should behave like new action GET correctly converts multi-word tags
+rspec ./spec/controllers/admin/content_controller_spec.rb:361 # Admin::ContentController with admin connection it should behave like new action publishing a published article with an autosaved draft updates the original
+rspec ./spec/controllers/admin/content_controller_spec.rb:367 # Admin::ContentController with admin connection it should behave like new action publishing a published article with an autosaved draft deletes the draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:381 # Admin::ContentController with admin connection it should behave like new action publishing a draft copy of a published article updates the original
+rspec ./spec/controllers/admin/content_controller_spec.rb:387 # Admin::ContentController with admin connection it should behave like new action publishing a draft copy of a published article deletes the draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:401 # Admin::ContentController with admin connection it should behave like new action saving a published article as draft leaves the original published
+rspec ./spec/controllers/admin/content_controller_spec.rb:406 # Admin::ContentController with admin connection it should behave like new action saving a published article as draft leaves the original as is
+rspec ./spec/controllers/admin/content_controller_spec.rb:411 # Admin::ContentController with admin connection it should behave like new action saving a published article as draft redirects to the index
+rspec ./spec/controllers/admin/content_controller_spec.rb:415 # Admin::ContentController with admin connection it should behave like new action saving a published article as draft creates a draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:428 # Admin::ContentController with admin connection it should behave like new action with an unrelated draft in the database saving new article as draft leaves the original draft in existence
+rspec ./spec/controllers/admin/content_controller_spec.rb:441 # Admin::ContentController with admin connection it should behave like destroy action should_not destroy article by get
+rspec ./spec/controllers/admin/content_controller_spec.rb:451 # Admin::ContentController with admin connection it should behave like destroy action should destroy article by post
+rspec ./spec/controllers/admin/content_controller_spec.rb:87 # Admin::ContentController with admin connection it should behave like autosave action first time for a new article should save new article with draft status and no parent article
+rspec ./spec/controllers/admin/content_controller_spec.rb:111 # Admin::ContentController with admin connection it should behave like autosave action second time for a new article should save the same article with draft status and no parent article
+rspec ./spec/controllers/admin/content_controller_spec.rb:138 # Admin::ContentController with admin connection it should behave like autosave action for a published article should create a draft article with proper attributes and existing article as a parent
+rspec ./spec/controllers/admin/content_controller_spec.rb:150 # Admin::ContentController with admin connection it should behave like autosave action for a published article should not create another draft article with parent_id if article has already a draft associated
+rspec ./spec/controllers/admin/content_controller_spec.rb:158 # Admin::ContentController with admin connection it should behave like autosave action for a published article should create a draft with the same permalink even if the title has changed
+rspec ./spec/controllers/admin/content_controller_spec.rb:175 # Admin::ContentController with admin connection it should behave like autosave action with an unrelated draft in the database leaves the original draft in existence
+rspec ./spec/controllers/admin/content_controller_spec.rb:486 # Admin::ContentController with admin connection edit action should edit article
+rspec ./spec/controllers/admin/content_controller_spec.rb:495 # Admin::ContentController with admin connection edit action should update article by edit action
+rspec ./spec/controllers/admin/content_controller_spec.rb:517 # Admin::ContentController with admin connection edit action should allow updating body_and_extended
+rspec ./spec/controllers/admin/content_controller_spec.rb:528 # Admin::ContentController with admin connection edit action should delete draft about this article if update
+rspec ./spec/controllers/admin/content_controller_spec.rb:537 # Admin::ContentController with admin connection edit action should delete all draft about this article if update not happen but why not
+rspec ./spec/controllers/admin/content_controller_spec.rb:551 # Admin::ContentController with admin connection resource_add action should add resource
+rspec ./spec/controllers/admin/content_controller_spec.rb:569 # Admin::ContentController with admin connection resource_remove action should remove resource
+rspec ./spec/controllers/admin/content_controller_spec.rb:591 # Admin::ContentController with admin connection auto_complete_for_article_keywords action should return foo for keywords fo
+rspec ./spec/controllers/admin/content_controller_spec.rb:597 # Admin::ContentController with admin connection auto_complete_for_article_keywords action should return nothing for hello
+rspec ./spec/controllers/admin/content_controller_spec.rb:603 # Admin::ContentController with admin connection auto_complete_for_article_keywords action should return bar and bazz for ba keyword
+rspec ./spec/controllers/admin/content_controller_spec.rb:9 # Admin::ContentController with publisher connection it should behave like index action should render template index
+rspec ./spec/controllers/admin/content_controller_spec.rb:14 # Admin::ContentController with publisher connection it should behave like index action should see all published in index
+rspec ./spec/controllers/admin/content_controller_spec.rb:20 # Admin::ContentController with publisher connection it should behave like index action should restrict only by searchstring
+rspec ./spec/controllers/admin/content_controller_spec.rb:28 # Admin::ContentController with publisher connection it should behave like index action should restrict by searchstring and published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:36 # Admin::ContentController with publisher connection it should behave like index action should restrict to drafts
+rspec ./spec/controllers/admin/content_controller_spec.rb:44 # Admin::ContentController with publisher connection it should behave like index action should restrict to publication pending articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:52 # Admin::ContentController with publisher connection it should behave like index action should restrict to withdrawn articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:60 # Admin::ContentController with publisher connection it should behave like index action should restrict to withdrawn articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:68 # Admin::ContentController with publisher connection it should behave like index action should restrict to published articles
+rspec ./spec/controllers/admin/content_controller_spec.rb:75 # Admin::ContentController with publisher connection it should behave like index action should fallback to default behavior
+rspec ./spec/controllers/admin/content_controller_spec.rb:233 # Admin::ContentController with publisher connection it should behave like new action should create article with no comments
+rspec ./spec/controllers/admin/content_controller_spec.rb:241 # Admin::ContentController with publisher connection it should behave like new action should create a published article with a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:246 # Admin::ContentController with publisher connection it should behave like new action should create a draft article without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:251 # Admin::ContentController with publisher connection it should behave like new action should create an unpublished article without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:256 # Admin::ContentController with publisher connection it should behave like new action should create an article published in the future without a redirect
+rspec ./spec/controllers/admin/content_controller_spec.rb:261 # Admin::ContentController with publisher connection it should behave like new action should create article with no pings
+rspec ./spec/controllers/admin/content_controller_spec.rb:268 # Admin::ContentController with publisher connection it should behave like new action should create an article linked to the current user
+rspec ./spec/controllers/admin/content_controller_spec.rb:274 # Admin::ContentController with publisher connection it should behave like new action should create new published article
+rspec ./spec/controllers/admin/content_controller_spec.rb:280 # Admin::ContentController with publisher connection it should behave like new action should redirect to show
+rspec ./spec/controllers/admin/content_controller_spec.rb:285 # Admin::ContentController with publisher connection it should behave like new action should send notifications on create
+rspec ./spec/controllers/admin/content_controller_spec.rb:302 # Admin::ContentController with publisher connection it should behave like new action should create an article in a category
+rspec ./spec/controllers/admin/content_controller_spec.rb:309 # Admin::ContentController with publisher connection it should behave like new action should create an article with tags
+rspec ./spec/controllers/admin/content_controller_spec.rb:315 # Admin::ContentController with publisher connection it should behave like new action should create article in future
+rspec ./spec/controllers/admin/content_controller_spec.rb:326 # Admin::ContentController with publisher connection it should behave like new action should correctly interpret time zone in :published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:332 # Admin::ContentController with publisher connection it should behave like new action should respect "GMT+0000 (UTC)" in :published_at
+rspec ./spec/controllers/admin/content_controller_spec.rb:338 # Admin::ContentController with publisher connection it should behave like new action should create a filtered article
+rspec ./spec/controllers/admin/content_controller_spec.rb:211 # Admin::ContentController with publisher connection it should behave like new action GET renders the 'new' template
+rspec ./spec/controllers/admin/content_controller_spec.rb:218 # Admin::ContentController with publisher connection it should behave like new action GET correctly converts multi-word tags
+rspec ./spec/controllers/admin/content_controller_spec.rb:361 # Admin::ContentController with publisher connection it should behave like new action publishing a published article with an autosaved draft updates the original
+rspec ./spec/controllers/admin/content_controller_spec.rb:367 # Admin::ContentController with publisher connection it should behave like new action publishing a published article with an autosaved draft deletes the draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:381 # Admin::ContentController with publisher connection it should behave like new action publishing a draft copy of a published article updates the original
+rspec ./spec/controllers/admin/content_controller_spec.rb:387 # Admin::ContentController with publisher connection it should behave like new action publishing a draft copy of a published article deletes the draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:401 # Admin::ContentController with publisher connection it should behave like new action saving a published article as draft leaves the original published
+rspec ./spec/controllers/admin/content_controller_spec.rb:406 # Admin::ContentController with publisher connection it should behave like new action saving a published article as draft leaves the original as is
+rspec ./spec/controllers/admin/content_controller_spec.rb:411 # Admin::ContentController with publisher connection it should behave like new action saving a published article as draft redirects to the index
+rspec ./spec/controllers/admin/content_controller_spec.rb:415 # Admin::ContentController with publisher connection it should behave like new action saving a published article as draft creates a draft
+rspec ./spec/controllers/admin/content_controller_spec.rb:428 # Admin::ContentController with publisher connection it should behave like new action with an unrelated draft in the database saving new article as draft leaves the original draft in existence
+rspec ./spec/controllers/admin/content_controller_spec.rb:441 # Admin::ContentController with publisher connection it should behave like destroy action should_not destroy article by get
+rspec ./spec/controllers/admin/content_controller_spec.rb:451 # Admin::ContentController with publisher connection it should behave like destroy action should destroy article by post
+rspec ./spec/controllers/admin/content_controller_spec.rb:627 # Admin::ContentController with publisher connection edit action should redirect if edit article doesn't his
+rspec ./spec/controllers/admin/content_controller_spec.rb:632 # Admin::ContentController with publisher connection edit action should edit article
+rspec ./spec/controllers/admin/content_controller_spec.rb:639 # Admin::ContentController with publisher connection edit action should update article by edit action
+rspec ./spec/controllers/admin/content_controller_spec.rb:664 # Admin::ContentController with publisher connection destroy action can be access should redirect when want destroy article
+rspec ./spec/controllers/comments_controller_spec.rb:46 # CommentsController#create should redirect to the article
+rspec ./spec/controllers/comments_controller_spec.rb:16 # CommentsController#create Basic comment creation should assign the new comment to @comment
+rspec ./spec/controllers/comments_controller_spec.rb:20 # CommentsController#create Basic comment creation should assign the article to @article
+rspec ./spec/controllers/comments_controller_spec.rb:24 # CommentsController#create Basic comment creation should save the comment
+rspec ./spec/controllers/comments_controller_spec.rb:28 # CommentsController#create Basic comment creation should set the author
+rspec ./spec/controllers/comments_controller_spec.rb:32 # CommentsController#create Basic comment creation should set an author cookie
+rspec ./spec/controllers/comments_controller_spec.rb:36 # CommentsController#create Basic comment creation should set a gravatar_id cookie
+rspec ./spec/controllers/comments_controller_spec.rb:40 # CommentsController#create Basic comment creation should set a url cookie
+rspec ./spec/controllers/comments_controller_spec.rb:55 # CommentsController AJAX creation should render the comment partial
+rspec ./spec/controllers/comments_controller_spec.rb:64 # CommentsController#index scoped index GET 2007/10/11/slug/comments should redirect to /2007/10/11/slug#comments
+rspec ./spec/controllers/comments_controller_spec.rb:73 # CommentsController#index without format should be successful
+rspec ./spec/controllers/comments_controller_spec.rb:78 # CommentsController#index without format should not bother fetching any comments 
+rspec ./spec/controllers/comments_controller_spec.rb:94 # CommentsController#index with :format => 'atom' without article is succesful
+rspec ./spec/controllers/comments_controller_spec.rb:98 # CommentsController#index with :format => 'atom' without article passes the comments to the template
+rspec ./spec/controllers/comments_controller_spec.rb:102 # CommentsController#index with :format => 'atom' without article should return an atom feed
+rspec ./spec/controllers/comments_controller_spec.rb:108 # CommentsController#index with :format => 'atom' with an article should return an atom feed
+rspec ./spec/controllers/comments_controller_spec.rb:123 # CommentsController#index with :format => 'rss' without article is succesful
+rspec ./spec/controllers/comments_controller_spec.rb:127 # CommentsController#index with :format => 'rss' without article passes the comments to the template
+rspec ./spec/controllers/comments_controller_spec.rb:131 # CommentsController#index with :format => 'rss' without article should return an rss feed
+rspec ./spec/controllers/comments_controller_spec.rb:137 # CommentsController#index with :format => 'rss' with article should return an rss feed
+rspec ./spec/controllers/theme_controller_spec.rb:8 # ThemeController test_stylesheets
+rspec ./spec/controllers/theme_controller_spec.rb:16 # ThemeController test_images
+rspec ./spec/controllers/theme_controller_spec.rb:23 # ThemeController test_malicious_path
+rspec ./spec/controllers/theme_controller_spec.rb:28 # ThemeController test_view_theming
+rspec ./spec/controllers/accounts_controller_spec.rb:5 # AccountsController A successful login with 'Remember me' checked should not cause password to change
+rspec ./spec/controllers/accounts_controller_spec.rb:25 # AccountsController A successfully authenticated login session gets a user
+rspec ./spec/controllers/accounts_controller_spec.rb:30 # AccountsController A successfully authenticated login sets typo_user_profile cookie
+rspec ./spec/controllers/accounts_controller_spec.rb:35 # AccountsController A successfully authenticated login redirects to /bogus/location
+rspec ./spec/controllers/accounts_controller_spec.rb:41 # AccountsController A successfully authenticated login redirects to /admin if no return
+rspec ./spec/controllers/accounts_controller_spec.rb:46 # AccountsController A successfully authenticated login redirects to /admin if no return and you are logged in
+rspec ./spec/controllers/accounts_controller_spec.rb:52 # AccountsController A successfully authenticated login should redirect to signup if no users
+rspec ./spec/controllers/accounts_controller_spec.rb:70 # AccountsController User is inactive no user id goes in the session
+rspec ./spec/controllers/accounts_controller_spec.rb:75 # AccountsController User is inactive login should == "inactive"
+rspec ./spec/controllers/accounts_controller_spec.rb:80 # AccountsController User is inactive typo_user_profile cookie should be blank
+rspec ./spec/controllers/accounts_controller_spec.rb:85 # AccountsController User is inactive should render login action
+rspec ./spec/controllers/accounts_controller_spec.rb:102 # AccountsController Login with nil user and password should render login action
+rspec ./spec/controllers/accounts_controller_spec.rb:119 # AccountsController Login gets the wrong password no user in goes in the session
+rspec ./spec/controllers/accounts_controller_spec.rb:124 # AccountsController Login gets the wrong password login should == "bob"
+rspec ./spec/controllers/accounts_controller_spec.rb:129 # AccountsController Login gets the wrong password typo_user_profile cookie should be blank
+rspec ./spec/controllers/accounts_controller_spec.rb:134 # AccountsController Login gets the wrong password should render login action
+rspec ./spec/controllers/accounts_controller_spec.rb:141 # AccountsController GET /index should redirect to login
+rspec ./spec/controllers/accounts_controller_spec.rb:148 # AccountsController GET /index should redirect to signup
+rspec ./spec/controllers/accounts_controller_spec.rb:157 # AccountsController GET /login should render action :login
+rspec ./spec/controllers/accounts_controller_spec.rb:172 # AccountsController GET /login with 0 existing users should render action :signup
+rspec ./spec/controllers/accounts_controller_spec.rb:178 # AccountsController GET /login with 0 existing users should render :signup
+rspec ./spec/controllers/accounts_controller_spec.rb:191 # AccountsController with >0 existing user and allow_signup = 0 GET signup should redirect to login
+rspec ./spec/controllers/accounts_controller_spec.rb:198 # AccountsController with >0 existing user and allow_signup = 0 POST signup without allow_signup should redirect to login
+rspec ./spec/controllers/accounts_controller_spec.rb:212 # AccountsController with > 0 existing user and allow_signup = 1 GET signup with allow_signup should redirect to login
+rspec ./spec/controllers/accounts_controller_spec.rb:219 # AccountsController with > 0 existing user and allow_signup = 1 POST signup with allow_signup should redirect to login
+rspec ./spec/controllers/accounts_controller_spec.rb:235 # AccountsController GET signup with 0 existing users sets @user
+rspec ./spec/controllers/accounts_controller_spec.rb:240 # AccountsController GET signup with 0 existing users renders action signup
+rspec ./spec/controllers/accounts_controller_spec.rb:301 # AccountsController POST signup with 0 existing users creates and saves a user
+rspec ./spec/controllers/accounts_controller_spec.rb:308 # AccountsController POST signup with 0 existing users redirects to /account/confirm
+rspec ./spec/controllers/accounts_controller_spec.rb:313 # AccountsController POST signup with 0 existing users session gets a user
+rspec ./spec/controllers/accounts_controller_spec.rb:338 # AccountsController User is logged in trying to log in once again redirects to admin/dashboard/index
+rspec ./spec/controllers/accounts_controller_spec.rb:348 # AccountsController User is logged in when logging out deletes the session[:user_id]
+rspec ./spec/controllers/accounts_controller_spec.rb:352 # AccountsController User is logged in when logging out deletes the session[:user]
+rspec ./spec/controllers/accounts_controller_spec.rb:356 # AccountsController User is logged in when logging out redirects to the login action
+rspec ./spec/controllers/accounts_controller_spec.rb:360 # AccountsController User is logged in when logging out deletes cookies containing credentials
+rspec ./spec/controllers/accounts_controller_spec.rb:377 # AccountsController when user has lost their password when GET 
+rspec ./spec/controllers/accounts_controller_spec.rb:384 # AccountsController when user has lost their password when a known login or email is POSTed 
+rspec ./spec/controllers/accounts_controller_spec.rb:392 # AccountsController when user has lost their password when an unknown login or email is POSTed 
+rspec ./spec/controllers/accounts_controller_spec.rb:393 # AccountsController when user has lost their password when an unknown login or email is POSTed should display an error
+rspec ./spec/views/articles/feedback_atom_feed_spec.rb:17 # articles/feedback_atom_feed.atom.builder with one trackback should render a valid feed
+rspec ./spec/views/articles/feedback_atom_feed_spec.rb:21 # articles/feedback_atom_feed.atom.builder with one trackback should render an Atom feed with one item
+rspec ./spec/views/articles/feedback_atom_feed_spec.rb:26 # articles/feedback_atom_feed.atom.builder with one trackback the trackback entry should have all the required attributes
+rspec ./spec/views/articles/feedback_atom_feed_spec.rb:46 # articles/feedback_atom_feed.atom.builder with a comment with problematic characters should render a valid feed
+rspec ./spec/views/articles/feedback_atom_feed_spec.rb:50 # articles/feedback_atom_feed.atom.builder with a comment with problematic characters should render an Atom feed with one item
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb without a theme normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb without a theme normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb without a theme normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb without a theme normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb without a theme normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb without a theme without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb without a theme without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb without a theme when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb without a theme when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme standard_issue normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme standard_issue normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme standard_issue normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme standard_issue normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme standard_issue normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme standard_issue without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme standard_issue without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme standard_issue when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme standard_issue when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme true-blue-3 normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme true-blue-3 normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme true-blue-3 normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme true-blue-3 normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme true-blue-3 normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme true-blue-3 without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme true-blue-3 without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme true-blue-3 when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme true-blue-3 when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme typographic normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme typographic normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme typographic normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme typographic normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme typographic normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme typographic without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme typographic without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme typographic when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme typographic when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme true-red normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme true-red normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme true-red normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme true-red normally renders the regular article partial tw ce
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme true-red normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme true-red without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme true-red without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme true-red when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme true-red when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme bootstrap normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme bootstrap normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme bootstrap normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme bootstrap normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme bootstrap normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme bootstrap without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme bootstrap without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme bootstrap when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme bootstrap when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme dirtylicious normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme dirtylicious normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme dirtylicious normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme dirtylicious normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme dirtylicious normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme dirtylicious without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme dirtylicious without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme dirtylicious when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme dirtylicious when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/articles/index_spec.rb:23 # articles/index.html.erb with theme scribbish normally should not have too many paragraph marks around body
+rspec ./spec/views/articles/index_spec.rb:28 # articles/index.html.erb with theme scribbish normally should not have div nested inside p
+rspec ./spec/views/articles/index_spec.rb:32 # articles/index.html.erb with theme scribbish normally should not have extra escaped html
+rspec ./spec/views/articles/index_spec.rb:38 # articles/index.html.erb with theme scribbish normally renders the regular article partial twice
+rspec ./spec/views/articles/index_spec.rb:43 # articles/index.html.erb with theme scribbish normally does not render any password forms
+rspec ./spec/views/articles/index_spec.rb:61 # articles/index.html.erb with theme scribbish without search, on page 2 should not have pagination link to page 2
+rspec ./spec/views/articles/index_spec.rb:65 # articles/index.html.erb with theme scribbish without search, on page 2 should have pagination link to page 1
+rspec ./spec/views/articles/index_spec.rb:84 # articles/index.html.erb with theme scribbish when on page 2 of search should not have pagination link to search page 2
+rspec ./spec/views/articles/index_spec.rb:88 # articles/index.html.erb with theme scribbish when on page 2 of search should have pagination link to search page 1
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # First dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # First dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # First dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # First dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # First dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Second dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Second dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Second dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Second dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Second dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Dodgy comment #3 it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Dodgy comment #3 it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Dodgy comment #3 it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Dodgy comment #3 it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Dodgy comment #3 it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Extra Dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Extra Dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Extra Dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Extra Dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Extra Dodgy comment it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS1 it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS1 it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS1 it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS1 it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS1 it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # XSS2 it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare http URL it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare http URL it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare http URL it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare http URL it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare http URL it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare email address it should behave like CommentSanitization Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare email address it should behave like CommentSanitization Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare email address it should behave like CommentSanitization Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare email address it should behave like CommentSanitization Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:23 # Comment with bare email address it should behave like CommentSanitization Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # First dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # First dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # First dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # First dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # First dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Second dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Second dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Second dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Second dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Second dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Dodgy comment #3 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Dodgy comment #3 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Dodgy comment #3 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Dodgy comment #3 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Dodgy comment #3 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Extra Dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Extra Dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Extra Dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Extra Dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Extra Dodgy comment with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS1 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS1 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS1 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS1 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS1 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # XSS2 with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare http URL with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare http URL with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare http URL with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare http URL with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare http URL with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare email address with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the  textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare email address with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare email address with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the textile textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare email address with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the smartypants textfilter
+rspec ./spec/views/comments/html_sanitization_spec.rb:138 # Comment with bare email address with dofollow it should behave like CommentSanitizationWithDofollow Should sanitize content rendered with the markdown smartypants textfilter
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme standard_issue when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme standard_issue when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme true-blue-3 when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme true-blue-3 when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme typographic when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme typographic when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme true-red when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme true-red when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme bootstrap when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme bootstrap when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme dirtylicious when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme dirtylicious when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:24 # layouts/default.html.erb with theme scribbish when use_meta_keyword set to true renders assigned keywords
+rspec ./spec/views/layouts/default_spec.rb:35 # layouts/default.html.erb with theme scribbish when use_meta_keyword set to false does not render assigned keywords
+rspec ./spec/models/category_spec.rb:18 # Category should know published_articles
+rspec ./spec/models/category_spec.rb:27 # Category empty permalink should be converted
+rspec ./spec/models/category_spec.rb:33 # Category category with permalink should not have permalink generated
+rspec ./spec/models/category_spec.rb:45 # Category permalink 
+rspec ./spec/models/tag_spec.rb:7 # Tag we can Tag.get by name
+rspec ./spec/models/tag_spec.rb:12 # Tag tags are unique
+rspec ./spec/models/tag_spec.rb:19 # Tag display names with spaces can be found by dash joined name
+rspec ./spec/models/tag_spec.rb:29 # Tag articles can be tagged
+rspec ./spec/models/tag_spec.rb:40 # Tag find_all_with_article_counters finds 2 tags
+rspec ./spec/models/tag_spec.rb:56 # Tag permalink_url should be of form /tag/<name>
+rspec ./spec/models/tag_spec.rb:62 # Tag#published_articles should return only published articles
+rspec ./spec/models/comment_spec.rb:229 # Comment should have good default filter
+rspec ./spec/models/comment_spec.rb:25 # Comment#permalink_url should render permalink to comment in public part
+rspec ./spec/models/comment_spec.rb:31 # Comment#edit_url should get a url where edit comment in admin
+rspec ./spec/models/comment_spec.rb:39 # Comment#delete_url should get the delete url of comment in admin part
+rspec ./spec/models/comment_spec.rb:48 # Comment#save should save good comment
+rspec ./spec/models/comment_spec.rb:54 # Comment#save should save spam comment
+rspec ./spec/models/comment_spec.rb:60 # Comment#save should not save in invalid article
+rspec ./spec/models/comment_spec.rb:69 # Comment#save should change old comment
+rspec ./spec/models/comment_spec.rb:75 # Comment#save should save a valid comment
+rspec ./spec/models/comment_spec.rb:81 # Comment#save should not save with article not allow comment
+rspec ./spec/models/comment_spec.rb:98 # Comment#create should create comment
+rspec ./spec/models/comment_spec.rb:104 # Comment#create preserves urls starting with https://
+rspec ./spec/models/comment_spec.rb:110 # Comment#create preserves urls starting with http://
+rspec ./spec/models/comment_spec.rb:116 # Comment#create prepends http:// to urls without protocol
+rspec ./spec/models/comment_spec.rb:128 # Comment#spam? should reject spam rbl
+rspec ./spec/models/comment_spec.rb:135 # Comment#spam? should not define spam a comment rbl with lookup succeeds
+rspec ./spec/models/comment_spec.rb:143 # Comment#spam? should reject spam with uri limit
+rspec ./spec/models/comment_spec.rb:174 # Comment reject xss should reject with filter ''
+rspec ./spec/models/comment_spec.rb:174 # Comment reject xss should reject with filter 'textile'
+rspec ./spec/models/comment_spec.rb:174 # Comment reject xss should reject with filter 'markdown'
+rspec ./spec/models/comment_spec.rb:174 # Comment reject xss should reject with filter 'smartypants'
+rspec ./spec/models/comment_spec.rb:174 # Comment reject xss should reject with filter 'markdown smartypants'
+rspec ./spec/models/comment_spec.rb:190 # Comment change state should becomes withdraw
+rspec ./spec/models/comment_spec.rb:202 # Comment change state should becomes not published in article if withdraw
+rspec ./spec/models/comment_spec.rb:220 # Comment change state should becomes confirmed if withdrawn
+rspec ./spec/models/comment_spec.rb:242 # Comment with feedback moderation enabled should save comment as presumably spam
+rspec ./spec/models/comment_spec.rb:255 # Comment with feedback moderation enabled should save comment as confirmed ham
+rspec ./spec/models/text_filter_spec.rb:240 # With the list of available filters#filter text by name
+rspec ./spec/models/text_filter_spec.rb:15 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:16 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:17 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:18 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:19 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:20 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:21 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:22 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:23 # With the list of available filters#available_filters 
+rspec ./spec/models/text_filter_spec.rb:28 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:29 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:30 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:31 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:32 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:33 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:34 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:35 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:36 # With the list of available filters#macro_filters 
+rspec ./spec/models/text_filter_spec.rb:45 # With the list of available filters#filter_text unknown
+rspec ./spec/models/text_filter_spec.rb:50 # With the list of available filters#filter_text smartypants
+rspec ./spec/models/text_filter_spec.rb:56 # With the list of available filters#filter_text markdown
+rspec ./spec/models/text_filter_spec.rb:65 # With the list of available filters#filter_text filterchain
+rspec ./spec/models/text_filter_spec.rb:147 # With the list of available filters#filter_text test_code_plus_markup_chain
+rspec ./spec/models/text_filter_spec.rb:79 # With the list of available filters#filter_text specific typo tags flickr should show with default settings
+rspec ./spec/models/text_filter_spec.rb:86 # With the list of available filters#filter_text specific typo tags flickr should use default image size
+rspec ./spec/models/text_filter_spec.rb:93 # With the list of available filters#filter_text specific typo tags flickr should use caption
+rspec ./spec/models/text_filter_spec.rb:100 # With the list of available filters#filter_text specific typo tags flickr broken_flickr_link
+rspec ./spec/models/text_filter_spec.rb:112 # With the list of available filters#filter_text code textfilter single line should made nothin if no args
+rspec ./spec/models/text_filter_spec.rb:116 # With the list of available filters#filter_text code textfilter single line should parse ruby lang
+rspec ./spec/models/text_filter_spec.rb:120 # With the list of available filters#filter_text code textfilter single line should parse ruby and xml in same sentence but not in same place
+rspec ./spec/models/text_filter_spec.rb:126 # With the list of available filters#filter_text code textfilter multiline should render ruby
+rspec ./spec/models/text_filter_spec.rb:191 # With the list of available filters#filter_text lightbox should work
+rspec ./spec/models/text_filter_spec.rb:198 # With the list of available filters#filter_text lightbox shoudl use default thumb image size
+rspec ./spec/models/text_filter_spec.rb:205 # With the list of available filters#filter_text lightbox should use default display image size
+rspec ./spec/models/text_filter_spec.rb:212 # With the list of available filters#filter_text lightbox should work with caption
+rspec ./spec/models/text_filter_spec.rb:222 # With the list of available filters#filter_text combining a post-macro with markdown correctly interprets the macro
+rspec ./spec/models/text_filter_spec.rb:230 # With the list of available filters#filter_text combining a post-macro with markdown correctly interprets the macro
+rspec ./spec/models/article_closing_spec.rb:17 # CommentClosing from Test::Unit; no I don't know why it's in article_closing_spec.rb test_new_article_should_be_open_if_auto_close_is_zero
+rspec ./spec/models/article_closing_spec.rb:23 # CommentClosing from Test::Unit; no I don't know why it's in article_closing_spec.rb test_old_article_should_be_open_if_auto_close_is_zero
+rspec ./spec/models/article_closing_spec.rb:28 # CommentClosing from Test::Unit; no I don't know why it's in article_closing_spec.rb test_new_article_should_be_open_if_auto_close_is_thirty
+rspec ./spec/models/article_closing_spec.rb:36 # CommentClosing from Test::Unit; no I don't know why it's in article_closing_spec.rb test_old_article_should_be_closed_if_auto_close_is_thirty
+rspec ./spec/models/cache_support_spec.rb:10 # Given a published article An unchanged article does not invalidate the cache
+rspec ./spec/models/cache_support_spec.rb:14 # Given a published article changing the body smashes the cache
+rspec ./spec/models/cache_support_spec.rb:19 # Given a published article withdrawing it smashes the cache
+rspec ./spec/models/cache_support_spec.rb:24 # Given a published article destroying it smashes the cache
+rspec ./spec/models/cache_support_spec.rb:29 # Given a published article withdrawing, then destroying it smashes the cache
+rspec ./spec/models/cache_support_spec.rb:43 # Given an unpublished article publishing smashes the cache
+rspec ./spec/models/cache_support_spec.rb:47 # Given an unpublished article changing it keeps the cache
+rspec ./spec/models/cache_support_spec.rb:52 # Given an unpublished article destroying it keeps the cache
+rspec ./spec/models/cache_support_spec.rb:67 # Given an unpublished spammy comment changing it does not alter the cache
+rspec ./spec/models/cache_support_spec.rb:73 # Given an unpublished spammy comment publishing it does alter the cache
+rspec ./spec/models/cache_support_spec.rb:80 # Given an unpublished spammy comment destroying it does not alter the cache
+rspec ./spec/models/cache_support_spec.rb:92 # Given a published comment changing it destroys the cache
+rspec ./spec/models/cache_support_spec.rb:98 # Given a published comment unpublishing it destroys the cache
+rspec ./spec/models/cache_support_spec.rb:103 # Given a published comment destroying it destroys the cache
+rspec ./spec/models/cache_support_spec.rb:116 # Given an unpublished spammy trackback changing it does not alter the cache
+rspec ./spec/models/cache_support_spec.rb:122 # Given an unpublished spammy trackback publishing it does alter the cache
+rspec ./spec/models/cache_support_spec.rb:129 # Given an unpublished spammy trackback destroying it does not alter the cache
+rspec ./spec/models/cache_support_spec.rb:141 # Given a published trackback changing it destroys the cache
+rspec ./spec/models/cache_support_spec.rb:147 # Given a published trackback unpublishing it destroys the cache
+rspec ./spec/models/cache_support_spec.rb:152 # Given a published trackback destroying it destroys the cache
+rspec ./spec/models/post_type_spec.rb:25 # PostType post types are unique
+rspec ./spec/models/post_type_spec.rb:10 # PostType Given a new post type should give a valid post type
+rspec ./spec/models/post_type_spec.rb:14 # PostType Given a new post type should have a sanitized permalink
+rspec ./spec/models/post_type_spec.rb:19 # PostType Given a new post type should have a sanitized permalink with a
+rspec ./spec/models/trackback_spec.rb:13 # Trackback With the various trackback filters loaded and DNS mocked out appropriately Incomplete trackbacks should not be accepted
+rspec ./spec/models/trackback_spec.rb:22 # Trackback With the various trackback filters loaded and DNS mocked out appropriately A valid trackback should be accepted
+rspec ./spec/models/trackback_spec.rb:34 # Trackback With the various trackback filters loaded and DNS mocked out appropriately Trackbacks with a spammy link in the excerpt should be rejected
+rspec ./spec/models/trackback_spec.rb:41 # Trackback With the various trackback filters loaded and DNS mocked out appropriately Trackbacks with a spammy source url should be rejected
+rspec ./spec/models/trackback_spec.rb:47 # Trackback With the various trackback filters loaded and DNS mocked out appropriately Trackbacks from a spammy ip address should be rejected
+rspec ./spec/models/ping_spec.rb:15 # Given a post which references a pingback enabled article Pingback sent to url found in referenced header
+rspec ./spec/models/ping_spec.rb:22 # Given a post which references a pingback enabled article Pingback sent to url found in referenced body
+rspec ./spec/models/ping_spec.rb:31 # Given a post which references a pingback enabled article Pingback sent when new article is saved
+rspec ./spec/models/ping_spec.rb:79 # An article links to another article, which contains a trackback URL Trackback URL is detected and pinged
+rspec ./spec/models/ping_spec.rb:86 # An article links to another article, which contains a trackback URL sends a trackback without html tag in excerpt
+rspec ./spec/models/ping_spec.rb:100 # An article links to another article, which contains a trackback URL sends a trackback without markdown tag in excerpt
+rspec ./spec/models/ping_spec.rb:149 # Given a remote site to notify, eg technorati we can ping them correctly
+rspec ./spec/models/page_spec.rb:13 # Testing redirects a new published page gets a redirect
+rspec ./spec/models/page_spec.rb:21 # Testing redirects a new unpublished page should not get a redirect
+rspec ./spec/models/page_spec.rb:28 # Testing redirects Changin a published article permalink url should only change the to redirection
+rspec ./spec/models/page_spec.rb:55 # Given the fixture :first_page Pages cannot have the same name
+rspec ./spec/models/page_spec.rb:60 # Given the fixture :first_page should give a sanitized title
+rspec ./spec/models/page_spec.rb:52 # Given the fixture :first_page#permalink_url 
+rspec ./spec/models/page_spec.rb:122 # Given a valid page default filter should be fetched from the blog
+rspec ./spec/models/ping_pinger_spec.rb:13 # Ping::Pinger with Test::Unit test_pingback_url_nil
+rspec ./spec/models/ping_pinger_spec.rb:21 # Ping::Pinger with Test::Unit test_pingback_url_from_body
+rspec ./spec/models/ping_pinger_spec.rb:28 # Ping::Pinger with Test::Unit test_pingback_url
+rspec ./spec/models/sidebar_spec.rb:16 # Sidebar#find_all_visible returns only the sidebar with active position
+rspec ./spec/models/user_spec.rb:44 # User With the contents and users fixtures loaded The various article finders work appropriately
+rspec ./spec/models/user_spec.rb:221 # User#permalink_url 
+rspec ./spec/models/theme_spec.rb:16 # Given the default theme theme should be typographic
+rspec ./spec/models/theme_spec.rb:20 # Given the default theme theme description should be correct
+rspec ./spec/models/theme_spec.rb:25 # Given the default theme theme_from_path should find the correct theme
+rspec ./spec/models/theme_spec.rb:30 # Given the default theme#search_theme_path finds the right things 2
+rspec ./spec/models/theme_spec.rb:41 # Given the default theme find_all finds all the installed themes
+rspec ./spec/models/blog_spec.rb:56 # The first blog should be the only blog allowed
+rspec ./spec/models/blog_spec.rb:62 # The default blog should pick up updates after a cache clear
+rspec ./spec/models/blog_spec.rb:77 # Given no blogs, a new default blog should be valid after filling the title
+rspec ./spec/models/blog_spec.rb:82 # Given no blogs, a new default blog should be valid without filling the title
+rspec ./spec/models/blog_spec.rb:112 # Valid permalink in blog should be valid with only %title%
+rspec ./spec/models/blog_spec.rb:112 # Valid permalink in blog should be valid with only %title%.html
+rspec ./spec/models/blog_spec.rb:112 # Valid permalink in blog should be valid with only /hello/all/%year%/%title%
+rspec ./spec/models/blog_spec.rb:112 # Valid permalink in blog should be valid with only atom/%title%.html
+rspec ./spec/models/blog_spec.rb:112 # Valid permalink in blog should be valid with only ok/rss/%title%.html
+rspec ./spec/models/article_spec.rb:252 # Article test_find_published
+rspec ./spec/models/article_spec.rb:426 # Article#search with several words and no result should be empty
+rspec ./spec/models/content_state/feedback_states_spec.rb:10 # FeedbackStates from Test::Unit test_ham_all_the_way
+rspec ./spec/models/content_state/feedback_states_spec.rb:32 # FeedbackStates from Test::Unit test_spam_all_the_way
+rspec ./spec/models/content_state/feedback_states_spec.rb:55 # FeedbackStates from Test::Unit test_presumed_spam_marked_as_ham
+rspec ./spec/models/content_state/feedback_states_spec.rb:63 # FeedbackStates from Test::Unit test_presumed_ham_marked_as_spam
+Coverage report generated for RSpec to /home/ec2-user/environment/typo/coverage. 11688 / 15011 LOC (77.86%) covered.
